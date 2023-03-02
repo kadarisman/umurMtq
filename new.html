@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Umur MTQ</title>
+</head>
+
+<body>
+    <div class="d-flex justify-content-center mt-3">
+        <h5>Cek Umur Peserta MTQ</h5>
+
+    </div>
+    <div class="container mb-2" style="height: 300px;">
+        <div class="row">
+            <div class="col-sm">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Cabang</label>
+                    </div>
+                    <select class="custom-select" name="cabang" id="cabang">
+                        <option value="1">Tilawah Anak-anak</option>
+                        <option value="2">Tilawah Remaja</option>
+                        <option value="3">Tilawah Dewasa</option>
+                        <option value="4">Tilawah Cacat Netra</option>
+                        <option value="5">Murattal Remaja</option>
+                        <option value="6">Murattal Dewasa</option>
+                        <option value="7">Mujawwat Dewasa</option>
+                        <option value="8">1 juz dan Tilawah</option>
+                        <option value="9">5 juz dan Tilawah</option>
+                        <option value="10">10 juz</option>
+                        <option value="11">20 juz</option>
+                        <option value="12">30 juz</option>
+                        <option value="13">Bahasa Arab</option>
+                        <option value="14">Bahasa Indonesia</option>
+                        <option value="15">Bahasa inggris</option>
+                        <option value="16">Fahm Al-Qur’an</option>
+                        <option value="17">Syarh Al-Qur’an</option>
+                        <option value="18">Naskah</option>
+                        <option value="19">Hiasan Mushaf</option>
+                        <option value="20">Dekorasi</option>
+                        <option value="21">Kontemporer</option>
+                        <option value="22">M2IQ</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Jadwal MTQ</label>
+                    </div>
+                    <input type="date" name="mtqDate" id="mtqDate" placeholder="2022/08/03" class="form-control">
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Lahir</label>
+                    </div>
+                    <input type="date" name="birthDate" id="birthDate" placeholder="1989/08/03" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-primary mr-1" id="count" onclick="countAge()">Hitung</button>
+            <button type="button" class="btn btn-danger"  id="clear">Hapus</button>
+        </div>
+
+        <div class="d-flex justify-content-center mt-2" id="result-container"></div>
+
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+        <span>Built With ❤️ By Kadarisman</span>
+    </div>
+    <div class="d-flex justify-content-center">
+        <span class="sumber"> Sumber : <a
+                href="https://www.salmawa.com/2021/07/inilah-aturan-dan-batasan-umur.html">salmawa.com</a> </span>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
