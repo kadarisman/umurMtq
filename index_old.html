@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style type="text/css">
+		.container {
+			padding-top: 20px;
+			border-style: groove;
+			width: 400px;
+			height: 300px;
+			padding: 10px;
+		}
+
+		#result-container {
+			margin-top: 15px;
+		}
+
+		.sumber {
+			color: red;
+			padding-top: 30px;
+		}
+	</style>
+	<title>Umur MTQ</title>
+</head>
+
+<body>
+	<center>
+		<div class="container">
+			<h3>Batas Umur Peserta MTQ</h3>
+			<label>Cabang :</label>
+			<select name="cabang" id="cabang">
+				<option value="1">Tilawah Anak-anak</option>
+				<option value="2">Tilawah Remaja</option>
+				<option value="3">Tilawah Dewasa</option>
+				<option value="4">Tilawah Cacat Netra</option>
+				<option value="5">Murattal Remaja</option>
+				<option value="6">Murattal Dewasa</option>
+				<option value="7">Mujawwat Dewasa</option>
+				<option value="8">1 juz dan Tilawah</option>
+				<option value="9">5 juz dan Tilawah</option>
+				<option value="10">10 juz</option>
+				<option value="11">20 juz</option>
+				<option value="12">30 juz</option>
+				<option value="13">Bahasa Arab</option>
+				<option value="14">Bahasa Indonesia</option>
+				<option value="15">Bahasa inggris</option>
+				<option value="16">Fahm Al-Qur’an</option>
+				<option value="17">Syarh Al-Qur’an</option>
+				<option value="18">Naskah</option>
+				<option value="19">Hiasan Mushaf</option>
+				<option value="20">Dekorasi</option>
+				<option value="21">Kontemporer</option>
+				<option value="22">M2IQ</option>
+			</select>
+			<br>
+			<br>
+			<label>Jadwal MTQ :</label>
+			<input type="date" name="mtqDate" id="mtqDate" placeholder="2022/08/03">
+			<br>
+			<br>
+			<label>Lahir :</label>
+			<input type="date" name="birthDate" id="birthDate" placeholder="1989/08/03">
+			<br>
+			<br>
+			<button id="count" onclick="countAge()">Hitung</button>
+			<button id="clear">Hapus</button>
+
+			<div id="result-container">
+				<span id="result"></span>
+				<br>
+				<span id="ket"></span>
+				<br>
+				<span id="usiaCabangText"></span>
+			</div>
+		</div>
+	</center>
+	<footer>
+		<center>
+			<span>Built With ❤️ By Kadarisman</span>
+			<br>
+			<span class="sumber"> Sumber : <a
+					href="https://www.salmawa.com/2021/07/inilah-aturan-dan-batasan-umur.html">salmawa.com</a> </span>
+		</center>
+	</footer>
+	<script type="text/javascript">
+		function countAge() {
+			const birthDate = document.getElementById("birthDate").value;
+			const mtqDate = document.getElementById("mtqDate").value;
+			const btn = document.getElementById("count");
+			const msDay = 1000 * 60 * 60 * 24; // milidetik per hari
+			const msMonth = msDay * 30.44; // rata-rata milidetik per bulan
+			const msYear = msMonth * 12; // rata-rata milidetik per tahun
+			const birthDateMs = new Date(birthDate).getTime();
+			const nowMs = Date.now();
+			const ageMs = new Date(mtqDate) - birthDateMs;
+			const ageYear = Math.floor(ageMs / msYear);
+			const ageMonth = Math.floor((ageMs % msYear) / msMonth);
+			const ageDay = Math.floor(((ageMs % msYear) % msMonth) / msDay);
+			const age = `Usia Anda : ${ageYear} Tahun ${ageMonth} Bulan ${ageDay} Hari`;
+			document.getElementById("result").innerHTML = age;
+
+			const cabang = document.getElementById("cabang");
+			const cabangValue = cabang.value;
+
+			const batasUmur = {
+				satu: {//tilawah anak anak
+					msYear: 14,
+					msMonth: 11,
+					msDay: 29
+				},
+				dua: {// tilawah remaja
+					msYear: 24,
+					msMonth: 11,
+					msDay: 29
+				},
+				tiga: {//tilawah dewasa
+					msYear: 40,
+					msMonth: 11,
+					msDay: 29
+				},
+				empat: {//tilawah cacat netra
+					msYear: 49,
+					msMonth: 11,
+					msDay: 29
+				},
+				lima: {//murattal remaja
+					msYear: 24,
+					msMonth: 11,
+					msDay: 29
+				},
+				enam: {//murattal dewasa
+					msYear: 40,
+					msMonth: 11,
+					msDay: 29
+				},
+				tujuh: {//mujawwad dewasa
+					msYear: 40,
+					msMonth: 11,
+					msDay: 29
+				},
+				delapan: {//1 juz
+					msYear: 15,
+					msMonth: 11,
+					msDay: 29
+				},
+				sembilan: {//5 juz
+					msYear: 20,
+					msMonth: 11,
+					msDay: 29
+				},
+				sepuluh: {//10 juz
+					msYear: 22,
+					msMonth: 11,
+					msDay: 29
+				},
+				sebelas: {//20 juz
+					msYear: 22,
+					msMonth: 11,
+					msDay: 29
+				},
+				duabelas: {//30 juz
+					msYear: 22,
+					msMonth: 11,
+					msDay: 29
+				},
+				tigabelas: {//bahasa arab
+					msYear: 22,
+					msMonth: 11,
+					msDay: 29
+				},
+				empatbelas: {//bahasa indonesia
+					msYear: 34,
+					msMonth: 11,
+					msDay: 29
+				},
+				limabelas: {//bahasa inggris
+					msYear: 34,
+					msMonth: 11,
+					msDay: 29
+				},
+				enambelas: {//fahmil
+					msYear: 18,
+					msMonth: 11,
+					msDay: 29
+				},
+				tujuhbelas: {//syarhil
+					msYear: 18,
+					msMonth: 11,
+					msDay: 29
+				},
+				delapanbelas: {//naskah
+					msYear: 34,
+					msMonth: 11,
+					msDay: 29
+				},
+				sembilanbelas: {//mushaf
+					msYear: 34,
+					msMonth: 11,
+					msDay: 29
+				},
+				duapuluh: {//dekor
+					msYear: 34,
+					msMonth: 11,
+					msDay: 29
+				},
+				duapuluhsatu: {//kontem
+					msYear: 34,
+					msMonth: 11,
+					msDay: 29
+				},
+				duapuluhdua: {//m2iq
+					msYear: 24,
+					msMonth: 11,
+					msDay: 29
+				},
+			}
+			if (cabangValue == 1) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.satu.msYear) {
+					usiaCabangResult = `${batasUmur.satu.msYear} Tahun ${batasUmur.satu.msMonth} Bulan ${batasUmur.satu.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.satu.msMonth) {
+					usiaCabangResult = `${batasUmur.satu.msYear} Tahun ${batasUmur.satu.msMonth} Bulan ${batasUmur.satu.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.satu.msDay) {
+					usiaCabangResult = `${batasUmur.satu.msYear} Tahun ${batasUmur.satu.msMonth} Bulan ${batasUmur.satu.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.satu.msYear} Tahun ${batasUmur.satu.msMonth} Bulan ${batasUmur.satu.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 2) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.dua.msYear) {
+					usiaCabangResult = `${batasUmur.dua.msYear} Tahun ${batasUmur.dua.msMonth} Bulan ${batasUmur.dua.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.dua.msMonth) {
+					usiaCabangResult = `${batasUmur.dua.msYear} Tahun ${batasUmur.dua.msMonth} Bulan ${batasUmur.dua.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.dua.msDay) {
+					usiaCabangResult = `${batasUmur.dua.msYear} Tahun ${batasUmur.dua.msMonth} Bulan ${batasUmur.dua.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.dua.msYear} Tahun ${batasUmur.dua.msMonth} Bulan ${batasUmur.dua.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 3) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.tiga.msYear) {
+					usiaCabangResult = `${batasUmur.tiga.msYear} Tahun ${batasUmur.tiga.msMonth} Bulan ${batasUmur.tiga.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.tiga.msMonth) {
+					usiaCabangResult = `${batasUmur.tiga.msYear} Tahun ${batasUmur.tiga.msMonth} Bulan ${batasUmur.tiga.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.tiga.msDay) {
+					usiaCabangResult = `${batasUmur.tiga.msYear} Tahun ${batasUmur.tiga.msMonth} Bulan ${batasUmur.tiga.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.tiga.msYear} Tahun ${batasUmur.tiga.msMonth} Bulan ${batasUmur.tiga.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 4) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.empat.msYear) {
+					usiaCabangResult = `${batasUmur.empat.msYear} Tahun ${batasUmur.empat.msMonth} Bulan ${batasUmur.empat.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.empat.msMonth) {
+					usiaCabangResult = `${batasUmur.empat.msYear} Tahun ${batasUmur.empat.msMonth} Bulan ${batasUmur.empat.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.empat.msDay) {
+					usiaCabangResult = `${batasUmur.empat.msYear} Tahun ${batasUmur.empat.msMonth} Bulan ${batasUmur.empat.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.empat.msYear} Tahun ${batasUmur.empat.msMonth} Bulan ${batasUmur.empat.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 5) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.lima.msYear) {
+					usiaCabangResult = `${batasUmur.lima.msYear} Tahun ${batasUmur.lima.msMonth} Bulan ${batasUmur.lima.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.lima.msMonth) {
+					usiaCabangResult = `${batasUmur.lima.msYear} Tahun ${batasUmur.lima.msMonth} Bulan ${batasUmur.lima.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.lima.msDay) {
+					usiaCabangResult = `${batasUmur.lima.msYear} Tahun ${batasUmur.lima.msMonth} Bulan ${batasUmur.lima.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.lima.msYear} Tahun ${batasUmur.lima.msMonth} Bulan ${batasUmur.lima.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 6) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.enam.msYear) {
+					usiaCabangResult = `${batasUmur.enam.msYear} Tahun ${batasUmur.enam.msMonth} Bulan ${batasUmur.enam.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.enam.msMonth) {
+					usiaCabangResult = `${batasUmur.enam.msYear} Tahun ${batasUmur.enam.msMonth} Bulan ${batasUmur.enam.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.enam.msDay) {
+					usiaCabangResult = `${batasUmur.enam.msYear} Tahun ${batasUmur.enam.msMonth} Bulan ${batasUmur.enam.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.enam.msYear} Tahun ${batasUmur.enam.msMonth} Bulan ${batasUmur.enam.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 7) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.tujuh.msYear) {
+					usiaCabangResult = `${batasUmur.tujuh.msYear} Tahun ${batasUmur.tujuh.msMonth} Bulan ${batasUmur.tujuh.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.tujuh.msMonth) {
+					usiaCabangResult = `${batasUmur.tujuh.msYear} Tahun ${batasUmur.tujuh.msMonth} Bulan ${batasUmur.tujuh.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.tujuh.msDay) {
+					usiaCabangResult = `${batasUmur.tujuh.msYear} Tahun ${batasUmur.tujuh.msMonth} Bulan ${batasUmur.tujuh.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.tujuh.msYear} Tahun ${batasUmur.tujuh.msMonth} Bulan ${batasUmur.tujuh.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 8) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.delapan.msYear) {
+					usiaCabangResult = `${batasUmur.delapan.msYear} Tahun ${batasUmur.delapan.msMonth} Bulan ${batasUmur.delapan.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.delapan.msMonth) {
+					usiaCabangResult = `${batasUmur.delapan.msYear} Tahun ${batasUmur.delapan.msMonth} Bulan ${batasUmur.delapan.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.delapan.msDay) {
+					usiaCabangResult = `${batasUmur.delapan.msYear} Tahun ${batasUmur.delapan.msMonth} Bulan ${batasUmur.delapan.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.delapan.msYear} Tahun ${batasUmur.delapan.msMonth} Bulan ${batasUmur.delapan.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 9) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.sembilan.msYear) {
+					usiaCabangResult = `${batasUmur.sembilan.msYear} Tahun ${batasUmur.sembilan.msMonth} Bulan ${batasUmur.sembilan.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.sembilan.msMonth) {
+					usiaCabangResult = `${batasUmur.sembilan.msYear} Tahun ${batasUmur.sembilan.msMonth} Bulan ${batasUmur.sembilan.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.sembilan.msDay) {
+					usiaCabangResult = `${batasUmur.sembilan.msYear} Tahun ${batasUmur.sembilan.msMonth} Bulan ${batasUmur.sembilan.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.sembilan.msYear} Tahun ${batasUmur.sembilan.msMonth} Bulan ${batasUmur.sembilan.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 10) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.sepuluh.msYear) {
+					usiaCabangResult = `${batasUmur.sepuluh.msYear} Tahun ${batasUmur.sepuluh.msMonth} Bulan ${batasUmur.sepuluh.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.sepuluh.msMonth) {
+					usiaCabangResult = `${batasUmur.sepuluh.msYear} Tahun ${batasUmur.sepuluh.msMonth} Bulan ${batasUmur.sepuluh.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.sepuluh.msDay) {
+					usiaCabangResult = `${batasUmur.sepuluh.msYear} Tahun ${batasUmur.sepuluh.msMonth} Bulan ${batasUmur.sepuluh.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.sepuluh.msYear} Tahun ${batasUmur.sepuluh.msMonth} Bulan ${batasUmur.sepuluh.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 11) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.sebelas.msYear) {
+					usiaCabangResult = `${batasUmur.sebelas.msYear} Tahun ${batasUmur.sebelas.msMonth} Bulan ${batasUmur.sebelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.sebelas.msMonth) {
+					usiaCabangResult = `${batasUmur.sebelas.msYear} Tahun ${batasUmur.sebelas.msMonth} Bulan ${batasUmur.sebelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.sebelas.msDay) {
+					usiaCabangResult = `${batasUmur.sebelas.msYear} Tahun ${batasUmur.sebelas.msMonth} Bulan ${batasUmur.sebelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.sebelas.msYear} Tahun ${batasUmur.sebelas.msMonth} Bulan ${batasUmur.sebelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 12) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.duabelas.msYear) {
+					usiaCabangResult = `${batasUmur.duabelas.msYear} Tahun ${batasUmur.duabelas.msMonth} Bulan ${batasUmur.duabelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.duabelas.msMonth) {
+					usiaCabangResult = `${batasUmur.duabelas.msYear} Tahun ${batasUmur.duabelas.msMonth} Bulan ${batasUmur.duabelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.duabelas.msDay) {
+					usiaCabangResult = `${batasUmur.duabelas.msYear} Tahun ${batasUmur.duabelas.msMonth} Bulan ${batasUmur.duabelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.duabelas.msYear} Tahun ${batasUmur.duabelas.msMonth} Bulan ${batasUmur.duabelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 13) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.tigabelas.msYear) {
+					usiaCabangResult = `${batasUmur.tigabelas.msYear} Tahun ${batasUmur.tigabelas.msMonth} Bulan ${batasUmur.tigabelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.tigabelas.msMonth) {
+					usiaCabangResult = `${batasUmur.tigabelas.msYear} Tahun ${batasUmur.tigabelas.msMonth} Bulan ${batasUmur.tigabelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.tigabelas.msDay) {
+					usiaCabangResult = `${batasUmur.tigabelas.msYear} Tahun ${batasUmur.tigabelas.msMonth} Bulan ${batasUmur.tigabelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.tigabelas.msYear} Tahun ${batasUmur.tigabelas.msMonth} Bulan ${batasUmur.tigabelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 14) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.empatbelas.msYear) {
+					usiaCabangResult = `${batasUmur.empatbelas.msYear} Tahun ${batasUmur.empatbelas.msMonth} Bulan ${batasUmur.empatbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.empatbelas.msMonth) {
+					usiaCabangResult = `${batasUmur.empatbelas.msYear} Tahun ${batasUmur.empatbelas.msMonth} Bulan ${batasUmur.empatbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.empatbelas.msDay) {
+					usiaCabangResult = `${batasUmur.empatbelas.msYear} Tahun ${batasUmur.empatbelas.msMonth} Bulan ${batasUmur.empatbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.empatbelas.msYear} Tahun ${batasUmur.empatbelas.msMonth} Bulan ${batasUmur.empatbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 15) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.limabelas.msYear) {
+					usiaCabangResult = `${batasUmur.limabelas.msYear} Tahun ${batasUmur.limabelas.msMonth} Bulan ${batasUmur.limabelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.limabelas.msMonth) {
+					usiaCabangResult = `${batasUmur.limabelas.msYear} Tahun ${batasUmur.limabelas.msMonth} Bulan ${batasUmur.limabelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.limabelas.msDay) {
+					usiaCabangResult = `${batasUmur.limabelas.msYear} Tahun ${batasUmur.limabelas.msMonth} Bulan ${batasUmur.limabelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.limabelas.msYear} Tahun ${batasUmur.limabelas.msMonth} Bulan ${batasUmur.limabelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 16) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.enambelas.msYear) {
+					usiaCabangResult = `${batasUmur.enambelas.msYear} Tahun ${batasUmur.enambelas.msMonth} Bulan ${batasUmur.enambelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.enambelas.msMonth) {
+					usiaCabangResult = `${batasUmur.enambelas.msYear} Tahun ${batasUmur.enambelas.msMonth} Bulan ${batasUmur.enambelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.enambelas.msDay) {
+					usiaCabangResult = `${batasUmur.enambelas.msYear} Tahun ${batasUmur.enambelas.msMonth} Bulan ${batasUmur.enambelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.enambelas.msYear} Tahun ${batasUmur.enambelas.msMonth} Bulan ${batasUmur.enambelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 17) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.tujuhbelas.msYear) {
+					usiaCabangResult = `${batasUmur.tujuhbelas.msYear} Tahun ${batasUmur.tujuhbelas.msMonth} Bulan ${batasUmur.tujuhbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.tujuhbelas.msMonth) {
+					usiaCabangResult = `${batasUmur.tujuhbelas.msYear} Tahun ${batasUmur.tujuhbelas.msMonth} Bulan ${batasUmur.tujuhbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.tujuhbelas.msDay) {
+					usiaCabangResult = `${batasUmur.tujuhbelas.msYear} Tahun ${batasUmur.tujuhbelas.msMonth} Bulan ${batasUmur.tujuhbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.tujuhbelas.msYear} Tahun ${batasUmur.tujuhbelas.msMonth} Bulan ${batasUmur.tujuhbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 18) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.delapanbelas.msYear) {
+					usiaCabangResult = `${batasUmur.delapanbelas.msYear} Tahun ${batasUmur.delapanbelas.msMonth} Bulan ${batasUmur.delapanbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.delapanbelas.msMonth) {
+					usiaCabangResult = `${batasUmur.delapanbelas.msYear} Tahun ${batasUmur.delapanbelas.msMonth} Bulan ${batasUmur.delapanbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.delapanbelas.msDay) {
+					usiaCabangResult = `${batasUmur.delapanbelas.msYear} Tahun ${batasUmur.delapanbelas.msMonth} Bulan ${batasUmur.delapanbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.delapanbelas.msYear} Tahun ${batasUmur.delapanbelas.msMonth} Bulan ${batasUmur.delapanbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 19) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.sembilanbelas.msYear) {
+					usiaCabangResult = `${batasUmur.sembilanbelas.msYear} Tahun ${batasUmur.sembilanbelas.msMonth} Bulan ${batasUmur.sembilanbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.sembilanbelas.msMonth) {
+					usiaCabangResult = `${batasUmur.sembilanbelas.msYear} Tahun ${batasUmur.sembilanbelas.msMonth} Bulan ${batasUmur.sembilanbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.sembilanbelas.msDay) {
+					usiaCabangResult = `${batasUmur.sembilanbelas.msYear} Tahun ${batasUmur.sembilanbelas.msMonth} Bulan ${batasUmur.sembilanbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.sembilanbelas.msYear} Tahun ${batasUmur.sembilanbelas.msMonth} Bulan ${batasUmur.sembilanbelas.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 20) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.duapuluh.msYear) {
+					usiaCabangResult = `${batasUmur.duapuluh.msYear} Tahun ${batasUmur.duapuluh.msMonth} Bulan ${batasUmur.duapuluh.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.duapuluh.msMonth) {
+					usiaCabangResult = `${batasUmur.duapuluh.msYear} Tahun ${batasUmur.duapuluh.msMonth} Bulan ${batasUmur.duapuluh.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.duapuluh.msDay) {
+					usiaCabangResult = `${batasUmur.duapuluh.msYear} Tahun ${batasUmur.duapuluh.msMonth} Bulan ${batasUmur.duapuluh.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.duapuluh.msYear} Tahun ${batasUmur.duapuluh.msMonth} Bulan ${batasUmur.duapuluh.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 21) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.duapuluhsatu.msYear) {
+					usiaCabangResult = `${batasUmur.duapuluhsatu.msYear} Tahun ${batasUmur.duapuluhsatu.msMonth} Bulan ${batasUmur.duapuluhsatu.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.duapuluhsatu.msMonth) {
+					usiaCabangResult = `${batasUmur.duapuluhsatu.msYear} Tahun ${batasUmur.duapuluhsatu.msMonth} Bulan ${batasUmur.duapuluhsatu.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.duapuluhsatu.msDay) {
+					usiaCabangResult = `${batasUmur.duapuluhsatu.msYear} Tahun ${batasUmur.duapuluhsatu.msMonth} Bulan ${batasUmur.duapuluhsatu.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.duapuluhsatu.msYear} Tahun ${batasUmur.duapuluhsatu.msMonth} Bulan ${batasUmur.duapuluhsatu.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+			if (cabangValue == 22) {
+				let usiaCabangResult;
+				if (ageYear > batasUmur.duapuluhdua.msYear) {
+					usiaCabangResult = `${batasUmur.duapuluhdua.msYear} Tahun ${batasUmur.duapuluhdua.msMonth} Bulan ${batasUmur.duapuluhdua.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageMonth > batasUmur.duapuluhdua.msMonth) {
+					usiaCabangResult = `${batasUmur.duapuluhdua.msYear} Tahun ${batasUmur.duapuluhdua.msMonth} Bulan ${batasUmur.duapuluhdua.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else if (ageDay > batasUmur.duapuluhdua.msDay) {
+					usiaCabangResult = `${batasUmur.duapuluhdua.msYear} Tahun ${batasUmur.duapuluhdua.msMonth} Bulan ${batasUmur.duapuluhdua.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Lewat Umur";
+					document.getElementById("ket").style.color = "red";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				} else {
+					usiaCabangResult = `${batasUmur.duapuluhdua.msYear} Tahun ${batasUmur.duapuluhdua.msMonth} Bulan ${batasUmur.duapuluhdua.msDay} Hari`;
+					document.getElementById("ket").innerHTML = "Anda Masih Bisa Ikut";
+					document.getElementById("ket").style.color = "Green";
+					document.getElementById("ket").style.fontWeight = "900";
+					document.getElementById("usiaCabangText").innerHTML = "Batas Usia Cabang :" + usiaCabangResult;
+				}
+			}
+
+		}
+		document.getElementById("clear").onclick = function () {
+			document.getElementById("ket").innerHTML = "";
+			document.getElementById("usiaCabangText").innerHTML = "";
+			document.getElementById("result").innerHTML = "";
+		};
+	</script>
+</body>
+
+</html>
