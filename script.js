@@ -17,6 +17,11 @@ function countAge() {
     const cabangName = cabang.options[cabang.selectedIndex].text;
 
     const batasUmur = {
+        nol: {//tartil
+            msYear: 12,
+            msMonth: 11,
+            msDay: 29
+        },
         satu: {//tilawah anak anak
             msYear: 14,
             msMonth: 11,
@@ -129,6 +134,21 @@ function countAge() {
         },
     }
     let usiaCabangResult;
+
+    if (cabangValue == 0) {
+        if(isNaN(ageYear)){
+            alert("Kolom Jadwal MTQ dan Lahir harus terisi");
+        }else{
+            if (ageYear > batasUmur.nol.msYear || ageMonth > batasUmur.nol.msMonth || ageDay > batasUmur.nol.msDay) {
+                usiaCabangResult = `${batasUmur.nol.msYear} Tahun ${batasUmur.nol.msMonth} Bulan ${batasUmur.nol.msDay} Hari`;
+                document.getElementById("result-container").innerHTML = " <div class='alert alert-danger' role='alert'> <b>Lewat Umur</b> usia Anda saat MTQ berlangsung <b>"+ageYear+" Tahun "+ageMonth+" Bulan "+ageDay+" Hari</b> Batas Usia Cabang "+cabangName+" <b>"+usiaCabangResult+"</b></div>";
+            }  else {
+                usiaCabangResult = `${batasUmur.nol.msYear} Tahun ${batasUmur.nol.msMonth} Bulan ${batasUmur.nol.msDay} Hari`;
+                document.getElementById("result-container").innerHTML = " <div class='alert alert-info' role='alert'> <b>Masih Bisa Ikut</b> usia Anda saat MTQ berlangsung <b>"+ageYear+" Tahun "+ageMonth+" Bulan "+ageDay+" Hari</b> Batas Usia Cabang "+cabangName+" <b>" + usiaCabangResult+"</b></div>";
+            }
+        }
+    }
+
     if (cabangValue == 1) {
         if(isNaN(ageYear)){
             alert("Kolom Jadwal MTQ dan Lahir harus terisi");
