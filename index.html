@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 
     <title>Umur MTQ</title>
 </head>
@@ -18,13 +18,11 @@
         <h5>Cek Umur Peserta MTQ</h5>
 
     </div>
-    <div class="container mb-2" style="height: 300px;">
-        <div class="row">
-            <div class="col-sm">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Cabang</label>
-                    </div>
+    <form>
+        <div class="container mb-2" style="height: 300px;">
+            <div class="row">
+                <div class="col-sm mt-2">
+                    <label><b>Cabang</b></label>
                     <select class="custom-select" name="cabang" id="cabang">
                         <option value="0">Tartil Qur'an</option>
                         <option value="1">Tilawah Anak-anak</option>
@@ -51,33 +49,27 @@
                         <option value="22">M2IQ</option>
                     </select>
                 </div>
-            </div>
-            <div class="col-sm">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Jadwal MTQ</label>
-                    </div>
-                    <input type="date" name="mtqDate" id="mtqDate" placeholder="2022/08/03" class="form-control">
+                <div class="col-sm mt-2">
+                    <label><b>Jadwal MTQ</b></label>
+                    <input type="date" name="mtqDate" id="mtqDate" class="form-control">
+                </div>
+                <div class="col-sm mt-2">
+                    <label><b>Tangal Lahir</b></label>
+                    <input type="date" name="birthDate" id="birthDate" class="form-control">
                 </div>
             </div>
-            <div class="col-sm">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Lahir</label>
-                    </div>
-                    <input type="date" name="birthDate" id="birthDate" placeholder="1989/08/03" class="form-control">
-                </div>
+
+            <div class="d-flex justify-content-center mt-3">
+                <button type="submit" class="btn btn-primary mr-1" id="count">Hitung</button>
+                <button type="button" class="btn btn-danger" id="clear">Hapus</button>
             </div>
+
+            <div class="d-flex justify-content-center mt-2" id="result-container">
+               
+            </div>
+
         </div>
-
-        <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-primary mr-1" id="count" onclick="countAge()">Hitung</button>
-            <button type="button" class="btn btn-danger"  id="clear">Hapus</button>
-        </div>
-
-        <div class="d-flex justify-content-center mt-2" id="result-container"></div>
-
-    </div>
+    </form>
 
     <div class="d-flex justify-content-center mt-5">
         <span>Built With ❤️ By Kadarisman</span>
@@ -98,7 +90,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+    <script src="new.js"></script>
 </body>
 
 </html>
